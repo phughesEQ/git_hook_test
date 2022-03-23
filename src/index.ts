@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-// @ts-ignore
-import express from 'express';
+import express = require('express');
 
 const app = express();
 const port = 3000;
