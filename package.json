@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "An example project to test git hooks",
   "main": "index.ts",
+  "bin": {
+    "cdk-test": "../git-hook-test/bin/cdk-test.js"
+  },
   "scripts": {
-    "test": "jest --colors --coverage test",
-    "prettier": "prettier --write \"src/**/*.{js,jsx,ts}\"",
-    "tslint": "tslint \"src/*.ts\"",
     "build": "npx tsc",
+    "cdk": "cdk",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts}\"",
+    "test": "jest --colors --coverage test",
+    "tslint": "tslint \"src/*.ts\"",
     "start": "npm run build && node dist/index.js",
-    "start:dev": "nodemon src/index.ts"
+    "start:dev": "nodemon src/index.ts",
+    "watch": "tsc -w"
   },
   "pre-push": [
     "prettier",
@@ -24,13 +29,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-cdk/aws-lambda": "^1.149.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.149.0",
+    "@aws-cdk/core": "^1.149.0",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1098.0",
+    "aws-cdk": "^2.17.0",
     "axios": "^0.26.1",
     "express": "^4.17.3"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.93",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.26",
+    "aws-cdk-lib": "2.17.0",
     "lint-staged": "^12.3.7",
     "nodemon": "^2.0.15",
     "pre-commit": "^1.2.2",

@@ -1,26 +1,13 @@
-import axios, { AxiosResponse } from 'axios';
-import express = require('express');
+import {
+  APIGatewayProxyEvent,
+  APIGatewayProxyResult
+} from "aws-lambda";
 
-const app = express();
-const port = 3000;
-
-app.get('/', (_, res) => {
-    res.send('Hello World!');
-});
-
-app.get('/todos', async (_, res) => {
-    try {
-        const results: AxiosResponse = await axios.get(
-            'https://jsonplaceholder.typicode.com/todos',
-        );
-        res.json(results.data);
-    } catch (err) {
-        res.send(err);
-        res.sendStatus(500);
-    }
-});
-
-app.listen(port, () => {
-    // tslint:disable-next-line:no-console
-    console.log(`Starting port on: ${port}`);
-});
+export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+  console.log("Request: ", JSON.stringify(event, undefined, 2))
+  const queries = JSON.stringify(event.queryStringParameters);
+  return {
+    statusCode: 200,
+    body: `Queries: ${queries}`
+  };
+};
