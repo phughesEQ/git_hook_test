@@ -1,9 +1,8 @@
-import { Runtime } from '@aws-cdk/aws-lambda';
-import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
-import * as cdk from '@aws-cdk/core';
-import { App, Duration, StackProps } from "@aws-cdk/core";
+import { App, Duration, Stack, StackProps } from "aws-cdk-lib";
+import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
+import { Runtime } from "aws-cdk-lib/aws-lambda";
 
-export class TsLambdaStack extends cdk.Stack {
+export class TsLambdaStack extends Stack {
   constructor(scope: App, id: string, props?: StackProps) {
     super(scope, id, props);
 
