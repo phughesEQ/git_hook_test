@@ -18,19 +18,10 @@ export class TsLambdaStack extends Stack {
       }
     });
 
-    const bucket = new s3.Bucket(this, "CdkTestBucket", {
+    new s3.Bucket(this, "CdkTestBucket", {
       encryption: s3.BucketEncryption.KMS,
       bucketKeyEnabled: true,
       enforceSSL: true
     });
-
-    bucket.addToResourcePolicy(
-      new PolicyStatement({
-        effect: Effect.ALLOW,
-        principals: [new ServicePrincipal("lambda.amazonaws.com")],
-        actions: ["s3.GetObject"],
-        resources: [`${bucket.bucketArn}`]
-      })
-    );
   }
 }
