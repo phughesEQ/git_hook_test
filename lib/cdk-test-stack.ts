@@ -1,7 +1,6 @@
 import { App, aws_s3 as s3, Duration, Stack, StackProps } from "aws-cdk-lib";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
-import { Effect, PolicyStatement, ServicePrincipal } from "aws-cdk-lib/aws-iam";
 
 export class TsLambdaStack extends Stack {
   constructor(scope: App, id: string, props?: StackProps) {
