@@ -62,7 +62,7 @@ async function getHello(event: any) {
 
 async function getItem(name: string) {
     const params: DynamoDB.DocumentClient.GetItemInput = {
-        Key: {name},
+        Key: { name },
         TableName: TABLE_NAME,
     };
 
