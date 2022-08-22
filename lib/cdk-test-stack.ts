@@ -1,42 +1,32 @@
 import { CfnOutput, Duration, Stack, StackProps } from "aws-cdk-lib";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
-import { FunctionUrlAuthType, Runtime} from "aws-cdk-lib/aws-lambda";
+import { FunctionUrlAuthType, Runtime } from "aws-cdk-lib/aws-lambda";
 import { Construct } from "constructs";
-import { AttributeType, Table } from "aws-cdk-lib/aws-dynamodb";
 
 export class TsLambdaStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-     const table = new Table(this, "Hello", {
-      partitionKey: { name: "name", type: AttributeType.STRING },
-    });
-
-    const dynamoLambda = new NodejsFunction(this, "helloWorldFn", {
+    const lambda = new NodejsFunction(this, "helloWorldFn", {
       runtime: Runtime.NODEJS_16_X,
-      entry: "src/index.ts",
+      entry: "src/handler/index.ts",
       handler: "handler",
       timeout: Duration.seconds(30),
       memorySize: 128,
       bundling: {
         minify: true
       },
-      environment: {
-        HELLO_TABLE_NAME: table.tableName,
-      },
     });
 
-    table.grantReadWriteData(dynamoLambda);
-
-    const myFunctionUrl = dynamoLambda.addFunctionUrl({
+    const myFunctionUrl = lambda.addFunctionUrl({
       authType: FunctionUrlAuthType.NONE,
       cors: {
-        allowedOrigins: ['*'],
+        allowedOrigins: ["*"]
       }
     });
 
-    new CfnOutput(this, 'FunctionUrl', {
-      value: myFunctionUrl.url,
+    new CfnOutput(this, "FunctionUrl", {
+      value: myFunctionUrl.url
     });
 
   }

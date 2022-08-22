@@ -4,7 +4,7 @@
   "description": "An example project to test git hooks",
   "main": "index.ts",
   "bin": {
-    "cdk-test": "../git-hook-test/bin/cdk-test.js"
+    "cdk-test": "bin/cdk-test.js"
   },
   "scripts": {
     "build": "npx tsc",
@@ -12,12 +12,9 @@
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts}\"",
     "test": "jest --colors --coverage test",
     "tslint": "tslint \"src/*.ts\"",
-    "start": "npm run build && node dist/index.js",
-    "start:dev": "nodemon src/index.ts",
     "watch": "tsc -w"
   },
   "pre-push": [
-    "prettier",
     "tslint",
     "test"
   ],
@@ -29,17 +26,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/aws-lambda": "^8.10.96",
     "aws-cdk-lib": "^2.22.0",
-    "aws-lambda": "^1.0.7",
     "constructs": "^10.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^27.4.1",
-    "@types/node": "^16.11.26",
-    "aws-cdk": "2.22.0",
+    "@types/aws-lambda": "^8.10.102",
+    "@types/jest": "^27.5.2",
+    "@types/node": "10.17.27",
+    "@types/prettier": "2.6.0",
+    "aws-cdk": "2.37.1",
+    "jest": "^27.5.1",
     "lint-staged": "^12.3.7",
-    "nodemon": "^2.0.15",
     "pre-commit": "^1.2.2",
     "pre-push": "^0.1.2",
     "prettier": "2.6.0",
